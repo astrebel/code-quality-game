@@ -1,13 +1,21 @@
 package es.macero.cqgame.util;
 
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 public final class Utils {
 
     private Utils() {
     }
-
-    public static String durationTranslator(String sonarDuration) {
-        String daysPart = "P" + (sonarDuration.contains("d") ? sonarDuration.substring(0, sonarDuration.indexOf('d')) + "D" : "");
-        String timePart = (sonarDuration.contains("d") ? sonarDuration.substring(sonarDuration.indexOf('d') + 1) : sonarDuration);
-        return daysPart + (timePart.isEmpty() ? "" : "T" + timePart.replaceAll("min", "M").replaceAll("h", "H"));
-    }
+    
+    public static Period durationTranslator(String sonarDuration) {
+    	PeriodFormatter formatter = new PeriodFormatterBuilder()
+    		    .appendDays().appendSuffix("d")
+    		    .appendHours().appendSuffix("h")
+    		    .appendMinutes().appendSuffix("min")
+    		    .toFormatter();
+    	
+    	return formatter.parsePeriod(sonarDuration);
+  }
 }

@@ -13,3 +13,11 @@ tr.cell-pos-2 {
 tr.cell-pos-3 {
 	background-color: #edd083;
 }
+
+body {
+	overflow: hidden;
+}
+
+.rankingtable {
+	width: 100%;
+}

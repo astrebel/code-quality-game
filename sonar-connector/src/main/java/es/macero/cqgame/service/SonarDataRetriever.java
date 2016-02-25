@@ -22,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Service
 @EnableAsync
@@ -30,7 +29,7 @@ import java.util.function.Consumer;
 public class SonarDataRetriever {
 
     private static final Log log = LogFactory.getLog(SonarDataRetriever.class);
-    public static final String GET_ISSUES_COMMAND = "/api/issues/search?assignees={assignees}|resolutions={resolutions}|p={page}|ps={pageSize}";
+    public static final String GET_ISSUES_COMMAND = "/api/issues/search?assignees={assignees}&resolutions={resolutions}&p={page}&ps={pageSize}";
 
     @Autowired
     SonarStatsService statsService;
@@ -48,10 +47,13 @@ public class SonarDataRetriever {
     public void retrieveData() {
         // It seems that sonar doesn't allow parallel queries with same user since it creates a register for internal
         // stats and that causes an error when inserting into the database.
-        statsService.getIds().stream().forEach(new RequestLauncher(statsService, sonarUrl, sonarUser, sonarPassword));
+    	
+    	for(String id : statsService.getIds()) {
+    		new RequestLauncher(statsService, sonarUrl, sonarUser, sonarPassword).accept(id);
+    	}
     }
 
-    private static final class RequestLauncher implements Consumer<String> {
+    private static final class RequestLauncher {
 
         private SonarStatsService statsService;
         private String sonarUrl;
@@ -65,7 +67,6 @@ public class SonarDataRetriever {
             this.sonarPassword = sonarPassword;
         }
 
-        @Override
         public void accept(String id) {
             try {
                 int pageIndex = 1;

@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import es.macero.cqgame.app.ApplicationTest;
+import es.macero.cqgame.domain.badges.SonarBadge;
 import es.macero.cqgame.domain.stats.SonarStatsRow;
 import es.macero.cqgame.service.SonarStatsService;
 
@@ -57,10 +59,13 @@ public class SonarStatsControllerTest{
 
 	@Test
 	public void testGetUsers() throws Exception {
+		Collection<SonarBadge> coll = new ArrayList<SonarBadge>();
 		SonarStatsRow statsRow1 = new SonarStatsRow(JOHN_ONE, TEAM_ONE, TOTAL_POINTS, TOTAL_PAID_DEBT, BLOCKER,
-				CRITICAL, MAJOR, MINOR, INFO, new ArrayList<>());
+				CRITICAL, MAJOR, MINOR, INFO, coll);
+		
+		coll = new ArrayList<SonarBadge>();
 		SonarStatsRow statsRow2 = new SonarStatsRow(JOHN_TWO, TEAM_TWO, TOTAL_POINTS, TOTAL_PAID_DEBT, BLOCKER,
-				CRITICAL, MAJOR, MINOR, INFO, new ArrayList<>());
+				CRITICAL, MAJOR, MINOR, INFO, coll);
 		List<SonarStatsRow> expectedStatsRows = Arrays.asList(statsRow1, statsRow2);
 
 		Mockito.when(sonarStatsService.getSortedStatsPerUser()).thenReturn(expectedStatsRows);

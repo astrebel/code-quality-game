@@ -33,4 +33,18 @@ public class SonarStatsController {
         model.put("statsTeams", stats);
         return "sonarstats";
     }
+    
+    @RequestMapping(value = "/tteams", method = RequestMethod.GET)
+    public String statsTeamsTableOnly(Map<String, Object> model) {
+        Collection<SonarStatsRow> stats = sonarStatsService.getSortedStatsPerTeam();
+        model.put("statsTeams", stats);
+        return "rankingtable";
+    }
+    
+    @RequestMapping(value = "/tusers", method = RequestMethod.GET)
+    public String statsHomeTableOnly(Map<String, Object> model) {
+        Collection<SonarStatsRow> stats = sonarStatsService.getSortedStatsPerUser();
+        model.put("stats", stats);
+        return "rankingtable";
+    }
 }

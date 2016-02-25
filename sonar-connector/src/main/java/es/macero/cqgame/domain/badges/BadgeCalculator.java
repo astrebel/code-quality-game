@@ -1,12 +1,11 @@
 package es.macero.cqgame.domain.badges;
 
-import es.macero.cqgame.resultbeans.Issue;
-
 import java.util.List;
-import java.util.Optional;
+
+import es.macero.cqgame.resultbeans.Issue;
 
 public interface BadgeCalculator {
 
-    Optional<SonarBadge> badgeFromIssueList(List<Issue> issues);
-
+//    Optional<SonarBadge> badgeFromIssueList(List<Issue> issues);
+	SonarBadge badgeFromIssueList(List<Issue> issues);
 }

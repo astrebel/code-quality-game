@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sonarUserList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="../users.xsd">
-	<user id="lena" alias="Lena" team="Team Alpha" />
-	<user id="mechero" alias="Mechero" team="Team Omega" />
-	<user id="goya" alias="Paco Goya" team="Team Omega" />
-	<user id="picasso" alias="Pablo Picasso" team="Team Alpha" />
+	<user id="goran" alias="Göran" team="Team Golvet" />
+	<user id="martin" alias="Martin" team="Team Golvet" />
+	<user id="joakim" alias="Joakim" team="Team Golvet" />
+	<user id="calle" alias="Calle" team="Team Golvet" />
+	<user id="arun" alias="Arun" team="Team Golvet" />
+	<user id="sebastian" alias="Sebastian" team="Team Grädhyllan" />
+	<user id="max" alias="Max" team="Team Grädhyllan" />
+	<user id="andreas" alias="Andi" team="Team Grädhyllan" />
+	<user id="joel" alias="Joel" team="Team Grädhyllan" />
+	<user id="lars" alias="Lars" team="Team Grädhyllan" />
 </sonarUserList>
