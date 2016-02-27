@@ -46,7 +46,7 @@
 						<td><table th:if="${stat.badges}">
 								<tr th:each="badge : ${stat.badges}" style="font-size: x-small;text-align: left;">
 									<td><img
-										th:attr="src=@{/png/thumb16.png},title='Badge',alt='Badge'"/></td>
+										th:attr="src=@{'/png/' + ${badge.image}},title='Badge',alt='Badge'"/></td>
 									<td th:text="${badge.name}">Badge name</td>
 									<td th:text="${badge.description}">Badge Description</td>
 								</tr>

@@ -27,7 +27,7 @@ import es.macero.cqgame.domain.badges.SonarBadge;
 import es.macero.cqgame.domain.stats.SonarStats;
 import es.macero.cqgame.domain.stats.SonarStatsRow;
 import es.macero.cqgame.domain.users.SonarUser;
-import es.macero.cqgame.domain.util.IssueDateFormatter;
+import es.macero.cqgame.domain.util.IssueDateParser;
 import es.macero.cqgame.resultbeans.Issue;
 import es.macero.cqgame.util.Utils;
 
@@ -88,7 +88,7 @@ public class SonarStatsService {
         log.info("Processing " + id + "; Stats: " + stats);
     }
 
-    public Collection<SonarStatsRow> getSortedStatsPerUser() {
+	public Collection<SonarStatsRow> getSortedStatsPerUser() {
         List<SonarStatsRow> rows = new ArrayList<>();
         for (Entry<String, SonarStats> entry : statsPerId.entrySet()) {
             SonarUser user = idsAndUsers.get(entry.getKey());
@@ -148,7 +148,7 @@ public class SonarStatsService {
     	int debtSum = 0;
     	for(Issue issue : issues) {
     		// This was legacyDate 
-    		if(IssueDateFormatter.format(issue.getCreationDate()).isAfter(new LocalDate().minusDays(30))) {
+    		if(IssueDateParser.parse(issue.getCreationDate()).isAfter(new LocalDate().minusDays(30))) {
     			issuesFilteredByLegacyDate.add(issue);
     			
     			if(issue.getDebt() != null) {
@@ -163,7 +163,7 @@ public class SonarStatsService {
     			}
     		}
     		// This was coverageDate
-    		if(IssueDateFormatter.format(issue.getCreationDate()).isAfter(new LocalDate().minusDays(30))) {
+    		if(IssueDateParser.parse(issue.getCreationDate()).isAfter(new LocalDate().minusDays(30))) {
     			issuesFilteredByCovDate.add(issue);
     		}
     	}

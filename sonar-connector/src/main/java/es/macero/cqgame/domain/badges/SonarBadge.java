@@ -3,14 +3,24 @@ package es.macero.cqgame.domain.badges;
 public class SonarBadge {
     private String name;
     private String description;
+    private String image;
     private int extraPoints;
-
+    
     public SonarBadge(String name, String description, int extraPoints) {
+    	this(name, description, "star2.png", extraPoints);
+    }
+
+    public SonarBadge(String name, String description, String image, int extraPoints) {
         super();
         this.name = name;
         this.description = description;
         this.extraPoints = extraPoints;
+        this.image = image;
     }
+    
+    public String getImage() {
+		return image;
+	}
 
     public String getName() {
         return name;
@@ -26,7 +36,7 @@ public class SonarBadge {
 
     @Override
     public String toString() {
-        return "SonarBadge [name=" + name + ", description=" + description + "]";
+        return "SonarBadge [name=" + name + ", description=" + description + "]" + ", image=" + image;
     }
 
     @Override

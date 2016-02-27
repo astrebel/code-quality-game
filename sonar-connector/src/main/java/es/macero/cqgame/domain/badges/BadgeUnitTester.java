@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import es.macero.cqgame.resultbeans.Issue;
 
 @Component
-public class BadgeUnitTester implements BadgeCalculator {
+public class BadgeUnitTester extends BaseBadgeCalculator {
     private static final int EXTRA_POINTS_PAPER = 100;
     private static final int EXTRA_POINTS_BRONZE = 250;
     private static final int EXTRA_POINTS_SILVER = 650;
@@ -17,7 +17,7 @@ public class BadgeUnitTester implements BadgeCalculator {
     private static final String RULE_ID_BRANCH = "common-java:InsufficientBranchCoverage";
 
     @Override
-    public SonarBadge badgeFromIssueList(List<Issue> issues) {
+    protected SonarBadge badgeFromIssue(List<Issue> issues, Issue currentIssue) {
     	int count = 0;
     	for(Issue issue : issues) {
     		if(issue.getRule().equalsIgnoreCase(RULE_ID_LINE) || issue.getRule().equalsIgnoreCase(RULE_ID_BRANCH)) {
@@ -25,15 +25,14 @@ public class BadgeUnitTester implements BadgeCalculator {
     		}
     	}
     	
-//        long count = issues.stream().filter(i -> i.getRule().equalsIgnoreCase(RULE_ID_LINE) || i.getRule().equalsIgnoreCase(RULE_ID_BRANCH)).count();
         if (count >= 50) {
-            return new SonarBadge("Golden Cover", "Fixing UT coverage for 50 legacy classes.", EXTRA_POINTS_GOLDEN);
+            return new SonarBadge("Golden Cover", "Fixing coverage for 50 classes", "reward2.png", EXTRA_POINTS_GOLDEN);
         } else if (count >= 25) {
-            return new SonarBadge("Silver Cover", "Fixing UT coverage for 25 legacy classes.", EXTRA_POINTS_SILVER);
+            return new SonarBadge("Silver Cover", "Fixing coverage for 25 classes", "reward2.png", EXTRA_POINTS_SILVER);
         } else if (count >= 10) {
-            return new SonarBadge("Bronze Cover", "Fixing UT coverage for 10 legacy classes.", EXTRA_POINTS_BRONZE);
+            return new SonarBadge("Bronze Cover", "Fixing coverage for 10 classes", "reward2.png", EXTRA_POINTS_BRONZE);
         } else if (count >= 1) {
-            return new SonarBadge("Paper Cover", "Fixing UT coverage for 1 legacy class.", EXTRA_POINTS_PAPER);
+            return new SonarBadge("Paper Cover", "Fixing coverage for 1 class", "reward2.png", EXTRA_POINTS_PAPER);
         } else {
             return null;
         }
