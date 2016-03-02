@@ -20,6 +20,7 @@
 	</parent>
 
 	<build>
+		<finalName>code-quality-game</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

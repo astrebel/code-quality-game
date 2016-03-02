@@ -6,9 +6,19 @@
 	href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
 <link rel="stylesheet" th:href="@{/blog.css}" />
 <link rel="stylesheet" th:href="@{/style.css}" />
+<script type="text/javascript"
+    src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script>
+    $(document).ready(
+            function() {
+                setInterval(function() {
+                	location.reload();
+                }, 7200 * 1000);
+            });
+</script>
 </head>
 <body th:fragment="rankingtable">
-	<div class="rankingtable pure-u-4-5">
+	<div id="table" class="rankingtable pure-u-4-5">
 		<table class="pure-table pure-table-horizontal" th:if="${stats}">
 			<thead>
 				<tr>

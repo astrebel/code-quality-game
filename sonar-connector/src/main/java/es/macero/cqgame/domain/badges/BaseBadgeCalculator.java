@@ -9,9 +9,14 @@ public abstract class BaseBadgeCalculator implements BadgeCalculator {
 	protected abstract SonarBadge badgeFromIssue(List<Issue> issues, Issue currentIssue);
 	
 	public SonarBadge badgeFromIssueList(List<Issue> issues) {
+		SonarBadge result = null;
 		for(Issue issue : issues) {
     		if(Utils.withinThisWeek(issue.getCloseDate())) {
-    			return badgeFromIssue(issues, issue);
+    			result = badgeFromIssue(issues, issue);
+    			
+    			if(result != null) {
+        			return result;
+        		}
     		}
     	}
 		
