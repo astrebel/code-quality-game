@@ -64,7 +64,7 @@ public class SonarStatsControllerTest{
 				CRITICAL, MAJOR, MINOR, INFO, coll);
 		
 		coll = new ArrayList<SonarBadge>();
-		coll.add(new SonarBadge("Test", "Test", 100));
+		coll.add(new SonarBadge("Test", "Test", 100, true));
 		SonarStatsRow statsRow2 = new SonarStatsRow(JOHN_TWO, TEAM_TWO, TOTAL_POINTS, TOTAL_PAID_DEBT, BLOCKER,
 				CRITICAL, MAJOR, MINOR, INFO, coll);
 		List<SonarStatsRow> expectedStatsRows = Arrays.asList(statsRow1, statsRow2);

@@ -37,8 +37,7 @@ public class SonarStats {
     		badgesExtraPoints += badge.getExtraPoints();
     	}
     	
-        //totalPoints = totalPaidDebt + (blocker * 10) + (critical * 5) + (major * 3) + badges.stream().mapToInt(SonarBadge::getExtraPoints).sum();
-    	totalPoints = totalPaidDebt + (blocker * 10) + (critical * 5) + (major * 3) + badgesExtraPoints;
+    	totalPoints = totalPaidDebt + (blocker * 10) + (critical * 5) + (major * 3)  + minor + badgesExtraPoints;
     }
 
     public int getTotalPaidDebt() {

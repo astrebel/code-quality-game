@@ -14,7 +14,7 @@ public class BadgeBlockerKiller extends BaseBadgeCalculator {
 	@Override
 	protected SonarBadge badgeFromIssue(List<Issue> issues, Issue currentIssue) {
 		if(SonarStats.SeverityType.BLOCKER.toString().equals(currentIssue.getSeverity())) {
-			return new SonarBadge("Blocker Killer", "Resolved at least one blocker issue", "ribbon41.png", EXTRA_POINTS);
+			return new SonarBadge("Blocker Killer", "Resolved at least one blocker issue", "ribbon41.png", EXTRA_POINTS, isVisible(currentIssue));
 		}
 		
 		return null;

@@ -54,7 +54,7 @@
 							th:class="${iter.count &lt; 4}? 'cell-pos-' + ${iter.count} : ''"
 							style="font-weight: bold;">Points</td>
 						<td><table th:if="${stat.badges}">
-								<tr th:each="badge : ${stat.badges}" style="font-size: x-small;text-align: left;">
+								<tr th:each="badge : ${stat.badges}" th:if="${badge.visible}" style="font-size: x-small;text-align: left;">
 									<td><img
 										th:attr="src=@{'/png/' + ${badge.image}},title='Badge',alt='Badge'"/></td>
 									<td th:text="${badge.name}">Badge name</td>

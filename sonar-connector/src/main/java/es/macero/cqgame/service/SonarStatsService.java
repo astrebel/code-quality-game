@@ -142,14 +142,11 @@ public class SonarStatsService {
     }
 
     private SonarStats fromIssueList(List<Issue> issues) {    	
-    	List<Issue> issuesFilteredByLegacyDate = new ArrayList<>();
-    	List<Issue> issuesFilteredByCovDate = new ArrayList<>();
+    	List<Issue> issuesFilteredByClosedDate = new ArrayList<>();
     	Map<String, Long> typeCount = new HashMap<>();
     	int debtSum = 0;
     	for(Issue issue : issues) {
-    		// This was legacyDate 
-    		if(IssueDateParser.parse(issue.getCreationDate()).isAfter(new LocalDate().minusDays(30))) {
-    			issuesFilteredByLegacyDate.add(issue);
+    		if(IssueDateParser.parse(issue.getCloseDate()).isAfter(new LocalDate().minusDays(30))) {
     			
     			if(issue.getDebt() != null) {
     				debtSum += (int) Utils.durationTranslator(issue.getDebt()).toStandardMinutes().getMinutes();
@@ -161,10 +158,8 @@ public class SonarStatsService {
     			} else {
     				typeCount.put(issue.getSeverity(), ++count);
     			}
-    		}
-    		// This was coverageDate
-    		if(IssueDateParser.parse(issue.getCreationDate()).isAfter(new LocalDate().minusDays(30))) {
-    			issuesFilteredByCovDate.add(issue);
+    			
+    			issuesFilteredByClosedDate.add(issue);
     		}
     	}
         
@@ -176,7 +171,7 @@ public class SonarStatsService {
         
         List<SonarBadge> badges = new ArrayList<>();
         for(BadgeCalculator calc : badgeCalculators) {
-        	SonarBadge badge = calc.badgeFromIssueList(issuesFilteredByCovDate);
+        	SonarBadge badge = calc.badgeFromIssueList(issuesFilteredByClosedDate);
         	if(badge != null) {
         		badges.add(badge);
         	}

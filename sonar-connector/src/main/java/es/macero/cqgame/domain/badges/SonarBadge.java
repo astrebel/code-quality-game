@@ -5,17 +5,19 @@ public class SonarBadge {
     private String description;
     private String image;
     private int extraPoints;
+    private boolean visible;
     
-    public SonarBadge(String name, String description, int extraPoints) {
-    	this(name, description, "star2.png", extraPoints);
+    public SonarBadge(String name, String description, int extraPoints, boolean visible) {
+    	this(name, description, "star2.png", extraPoints, visible);
     }
 
-    public SonarBadge(String name, String description, String image, int extraPoints) {
+    public SonarBadge(String name, String description, String image, int extraPoints, boolean visible) {
         super();
         this.name = name;
         this.description = description;
         this.extraPoints = extraPoints;
         this.image = image;
+        this.visible = visible;
     }
     
     public String getImage() {
@@ -32,6 +34,10 @@ public class SonarBadge {
 
     public int getExtraPoints() {
         return extraPoints;
+    }
+    
+    public boolean isVisible() {
+    	return visible;
     }
 
     @Override

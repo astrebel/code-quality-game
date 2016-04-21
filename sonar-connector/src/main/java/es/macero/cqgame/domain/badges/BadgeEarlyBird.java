@@ -16,6 +16,6 @@ public class BadgeEarlyBird extends BaseBadgeCalculator {
 
 	@Override
 	protected SonarBadge badgeFromIssue(List<Issue> issues, Issue currentIssue) {
-		return new SonarBadge("Early Bird", "Resolve any issue before " + earlyBirdDate, EXTRA_POINTS);
+		return new SonarBadge("Early Bird", "Resolve any issue before " + earlyBirdDate, EXTRA_POINTS, isVisible(currentIssue));
 	}
 }
